@@ -4,15 +4,18 @@ const addBtn = document.getElementById("add-btn");
 const noteList = document.getElementById("note-list");
 
 function render(notes) {
-  let listItems = '';
+  let listItems = "";
   for (let i = 0; i < notes.length; i++) {
-    const formattedNote = notes[i].replace(/\n/g, '<br>');
-    
-    listItems += `
-      <li class="flex items-center justify-between p-2 border rounded-md m-2 border-gray-300">
-        <span class="mr-2">${formattedNote}</span>
-        <button class="delete-btn bg-red-500 text-white px-2 py-1 rounded" data-index=${i}>Delete</button>
-      </li>`;
+    const formattedNote = notes[i].replace(/\n/g, "<br>");
+
+      listItems += `
+        <li class="flex items-start justify-between p-2 border rounded-md m-2 border-gray-300">
+          <div class="flex flex-col">
+            <span class="mb-auto mr-2">${formattedNote}</span>
+          </div>
+          <button class="delete-btn bg-red-500 text-white px-2 py-1 rounded self-end" data-index=${i}>Delete</button>
+        </li>`;
+
   }
   noteList.innerHTML = listItems;
   setupDeleteBtnListeners();
@@ -29,32 +32,29 @@ function setupDeleteBtnListeners() {
   });
 }
 
-
 function addNote() {
   const trimmedValue = noteInput.value.trim();
 
-  if (trimmedValue !== '') {
+  if (trimmedValue !== "") {
     myNotes.push(trimmedValue);
     render(myNotes);
-    noteInput.value = '';
+    noteInput.value = "";
     noteInput.scrollTop = 0;
     noteInput.focus();
-    
+
     noteInput.selectionStart = 0;
     noteInput.selectionEnd = 0;
   }
 }
 
-
-
 addBtn.addEventListener("click", addNote);
 
-noteInput.addEventListener('keydown', (event) => {
-  if (event.key === 'Enter' && event.shiftKey) {
+noteInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" && event.shiftKey) {
     event.preventDefault();
-    noteInput.value += '\n';
+    noteInput.value += "\n";
     noteInput.scrollTop = noteInput.scrollHeight;
-  } else if (event.key === 'Enter') {
+  } else if (event.key === "Enter") {
     addNote();
   }
 });
