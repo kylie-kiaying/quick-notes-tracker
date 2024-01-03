@@ -7,7 +7,7 @@ Open the project in your code editor and run the application:
 npm install
 npm run dev
 ```
-This will start the development server, and you can access the notes page at http://localhost:3000 in your web browser.
+This will start the development server, and you can access the notes page on your localhost in your web browser.
 
 
 ## Usage
